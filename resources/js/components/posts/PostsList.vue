@@ -1,16 +1,17 @@
 <template>
   <section class="my-5">
       <h2 class="mb-5">Lista Dei Post</h2>
-
-      <ul v-for="post in posts" :key="post.id">
-          <li>{{ post.title }}</li>
-      </ul>
+        <PostCard v-for="post in posts" :key="post.id" :post="post"/>
   </section>
 </template>
 
 <script>
+import PostCard from './PostCard.vue';
 export default {
     name: "PostsList",
+    components: {
+        PostCard,
+    },
     data(){
         return{
             posts: [],
