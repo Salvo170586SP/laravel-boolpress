@@ -2062,6 +2062,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -38540,17 +38542,22 @@ var render = function () {
     [
       _c("h2", { staticClass: "mb-5" }, [_vm._v("Lista Dei Post")]),
       _vm._v(" "),
-      _vm.isLoading ? _c("Loader") : _vm._e(),
-      _vm._v(" "),
-      _vm.posts.length
-        ? _c(
-            "div",
-            _vm._l(_vm.posts, function (post) {
-              return _c("PostCard", { key: post.id, attrs: { post: post } })
-            }),
-            1
-          )
-        : _c("p", [_vm._v("Non ci sono post")]),
+      _vm.isLoading
+        ? _c("Loader")
+        : _c("div", [
+            _vm.posts.length
+              ? _c(
+                  "div",
+                  _vm._l(_vm.posts, function (post) {
+                    return _c("PostCard", {
+                      key: post.id,
+                      attrs: { post: post },
+                    })
+                  }),
+                  1
+                )
+              : _c("p", [_vm._v("Non ci sono post")]),
+          ]),
     ],
     1
   )

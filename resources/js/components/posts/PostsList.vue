@@ -2,10 +2,12 @@
   <section class="my-5">
     <h2 class="mb-5">Lista Dei Post</h2>
     <Loader v-if="isLoading" />
-    <div v-if="posts.length">
-      <PostCard v-for="post in posts" :key="post.id" :post="post" />
+    <div v-else>
+      <div v-if="posts.length">
+        <PostCard v-for="post in posts" :key="post.id" :post="post" />
+      </div>
+      <p v-else>Non ci sono post</p>
     </div>
-    <p v-else>Non ci sono post</p>
   </section>
 </template>
 
