@@ -2020,6 +2020,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
   props: ["post"],
@@ -38497,24 +38508,41 @@ var render = function () {
         _vm._v(" "),
         _c("p", [_vm._v(_vm._s(_vm.post.content))]),
         _vm._v(" "),
-        _vm._m(0),
+        _c(
+          "footer",
+          {
+            staticClass:
+              "card-footer d-flex justify-content-between align-items-center",
+          },
+          [
+            _c(
+              "span",
+              { class: "badge badge-pill badge-" + _vm.post.category.color },
+              [_vm._v(_vm._s(_vm.post.category.label))]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              _vm._l(_vm.post.tags, function (tag) {
+                return _c(
+                  "span",
+                  {
+                    key: tag.id,
+                    staticClass: "badge badge-pill",
+                    style: "background-color: " + tag.color,
+                  },
+                  [_vm._v(_vm._s(tag.label))]
+                )
+              }),
+              0
+            ),
+          ]
+        ),
       ]),
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("footer", { staticClass: "blockquote-footer" }, [
-      _vm._v("\n        Someone famous in "),
-      _c("cite", { attrs: { title: "Source Title" } }, [
-        _vm._v("Source Title"),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
