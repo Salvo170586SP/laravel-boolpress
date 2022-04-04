@@ -1999,7 +1999,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
-  props: ["post"]
+  props: ["post"],
+  computed: {
+    //COSTRUISCO LA DATA
+    getDatePost: function getDatePost() {
+      var postDate = new Date(this.post.updated_at);
+      var day = postDate.getDate();
+      var month = postDate.getMonth();
+      var year = postDate.getFullYear();
+      var hours = postDate.getHours();
+      var minutes = postDate.getMinutes();
+      var seconds = postDate.getSeconds();
+      return "".concat(day, "/").concat(month, "/").concat(year, " ").concat(hours, ":").concat(minutes, ":").concat(seconds);
+    }
+  }
 });
 
 /***/ }),
@@ -37754,7 +37767,9 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card bg-dark my-4" }, [
-    _c("div", { staticClass: "card-header" }),
+    _c("div", { staticClass: "card-header" }, [
+      _vm._v(_vm._s(_vm.getDatePost)),
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body bg-dark" }, [
       _c("blockquote", { staticClass: "blockquote mb-0" }, [
@@ -37762,17 +37777,24 @@ var render = function () {
         _vm._v(" "),
         _c("p", [_vm._v(_vm._s(_vm.post.content))]),
         _vm._v(" "),
-        _c("footer", { staticClass: "blockquote-footer" }, [
-          _vm._v("\n        " + _vm._s(_vm.post.updated_at) + " "),
-          _c("cite", { attrs: { title: "Source Title" } }, [
-            _vm._v("Source Title"),
-          ]),
-        ]),
+        _vm._m(0),
       ]),
     ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("footer", { staticClass: "blockquote-footer" }, [
+      _vm._v("\n        Someone famous in "),
+      _c("cite", { attrs: { title: "Source Title" } }, [
+        _vm._v("Source Title"),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
