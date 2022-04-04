@@ -1,23 +1,25 @@
 <template>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-header">Example Component</div>
-
-          <div class="card-body">
-            <h1>Sito in costruzione</h1>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div>
+    <Header :title="title" />
+    <main>
+      <PostsList />
+    </main>
   </div>
 </template>
 
 <script>
+import Header from "./Header.vue";
+import PostsList from "./posts/PostsList.vue";
 export default {
-  mounted() {
-    console.log("Component mounted.");
+  name: "App",
+  components: {
+    Header,
+    PostsList,
   },
+  data(){
+    return{
+      title: "Welcome",
+    };
+  }
 };
 </script>
