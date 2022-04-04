@@ -118,7 +118,7 @@ inputImage.addEventListener('change', function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\LARAVEL\laravel-many-to-many\resources\js\preview-img.js */"./resources/js/preview-img.js");
+module.exports = __webpack_require__(/*! C:\LARAVEL\laravel-boolpress\resources\js\preview-img.js */"./resources/js/preview-img.js");
 
 
 /***/ })

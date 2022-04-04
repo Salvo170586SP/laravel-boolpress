@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Auth::routes(['register' => true]);
+Auth::routes(['register' => false]);
 
 
 
@@ -31,6 +31,11 @@ Route::middleware('auth')
 });
 
 
-Route::get('{any?}', function () {
+/* Route::get('{any?}', function () {
     return view('guest.home');
-})->where("any" , ".*");
+})->where("any" , ".*"); */
+
+
+Route::get('/', function () {
+    return view('guest.home');
+});
