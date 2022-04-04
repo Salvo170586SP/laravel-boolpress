@@ -2034,6 +2034,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostsList",
@@ -2056,7 +2059,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console.error(err);
       }).then(function () {
-        console.log('chiamata terminata');
+        console.log("chiamata terminata");
       });
     }
   },
@@ -37816,18 +37819,19 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    { staticClass: "my-5" },
-    [
-      _c("h2", { staticClass: "mb-5" }, [_vm._v("Lista Dei Post")]),
-      _vm._v(" "),
-      _vm._l(_vm.posts, function (post) {
-        return _c("PostCard", { key: post.id, attrs: { post: post } })
-      }),
-    ],
-    2
-  )
+  return _c("section", { staticClass: "my-5" }, [
+    _c("h2", { staticClass: "mb-5" }, [_vm._v("Lista Dei Post")]),
+    _vm._v(" "),
+    _vm.posts.length
+      ? _c(
+          "div",
+          _vm._l(_vm.posts, function (post) {
+            return _c("PostCard", { key: post.id, attrs: { post: post } })
+          }),
+          1
+        )
+      : _c("p", [_vm._v("Non ci sono post")]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
