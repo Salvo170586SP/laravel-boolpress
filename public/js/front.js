@@ -1990,19 +1990,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostsList",
   data: function data() {
     return {
-      posts: []
+      posts: [],
+      url: "http://localhost:8000/api/posts"
     };
   },
   methods: {
-    //chiamata dell API con axios
+    //CHIAMATA DELL API CON AXIOS
     getPosts: function getPosts() {
       var _this = this;
 
-      axios.get("http://localhost:8000/api/posts").then(function (res) {
+      axios.get(this.url).then(function (res) {
         _this.posts = res.data;
       })["catch"](function (err) {
         console.error(err);
@@ -2012,7 +2015,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    //chiamo l'API
+    //CHIAMO L'API
     this.getPosts();
   }
 });
@@ -37717,18 +37720,22 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "my-5" }, [
+  return _c(
+    "section",
+    { staticClass: "my-5" },
+    [
       _c("h2", { staticClass: "mb-5" }, [_vm._v("Lista Dei Post")]),
-    ])
-  },
-]
+      _vm._v(" "),
+      _vm._l(_vm.posts, function (post) {
+        return _c("ul", { key: post.id }, [
+          _c("li", [_vm._v(_vm._s(post.title))]),
+        ])
+      }),
+    ],
+    2
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
