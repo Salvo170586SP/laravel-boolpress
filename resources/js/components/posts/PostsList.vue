@@ -1,6 +1,7 @@
 <template>
   <section class="my-5">
     <h2 class="mb-5">Lista Dei Post</h2>
+    <Loader v-if="isLoading" />
     <div v-if="posts.length">
       <PostCard v-for="post in posts" :key="post.id" :post="post" />
     </div>
@@ -10,20 +11,24 @@
 
 <script>
 import PostCard from "./PostCard.vue";
+import Loader from "../Loader.vue";
 export default {
   name: "PostsList",
   components: {
     PostCard,
+    Loader,
   },
   data() {
     return {
       posts: [],
       url: "http://localhost:8000/api/posts",
+      isLoading: false,
     };
   },
   methods: {
     //CHIAMATA DELL API CON AXIOS
     getPosts() {
+      this.isLoading = true;
       axios
         .get(this.url)
         .then((res) => {
@@ -33,6 +38,7 @@ export default {
           console.error(err);
         })
         .then(() => {
+          this.isLoading = false;
           console.log("chiamata terminata");
         });
     },
