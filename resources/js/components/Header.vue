@@ -11,6 +11,11 @@
         <router-link class="nav-link" to="/">Home <span class="sr-only">(current)</span></router-link>
       </li>
     </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <router-link class="nav-link" to="/contacts">Contatti <span class="sr-only">(current)</span></router-link>
+      </li>
+    </ul>
   </div>
 </nav>
   </header>
