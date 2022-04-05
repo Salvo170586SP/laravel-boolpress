@@ -2028,14 +2028,49 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _posts_PostCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../posts/PostCard.vue */ "./resources/js/components/posts/PostCard.vue");
+/* harmony import */ var _Loader_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Loader.vue */ "./resources/js/components/Loader.vue");
 //
 //
 //
 //
 //
 //
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "PostDetailPage"
+  name: "PostDetailPage",
+  components: {
+    PostCard: _posts_PostCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Loader: _Loader_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      post: null,
+      isLoading: false
+    };
+  },
+  methods: {
+    getPost: function getPost() {
+      var _this = this;
+
+      this.isLoading = true;
+      axios.get("http://localhost:8000/api/posts/" + this.$route.params.id).then(function (res) {
+        _this.post = res.data;
+      })["catch"](function (err) {
+        console.error(err);
+      }).then(function () {
+        _this.isLoading = false;
+        console.log("chiamata terminata");
+      });
+    }
+  },
+  mounted: function mounted() {
+    //CHIAMO L'API
+    this.getPosts();
+  }
 });
 
 /***/ }),
@@ -38565,18 +38600,20 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { attrs: { id: "post-detail" } }, [
+  return _c(
+    "section",
+    { attrs: { id: "post-detail" } },
+    [
       _c("h2", [_vm._v("Dettagli post")]),
-    ])
-  },
-]
+      _vm._v(" "),
+      _vm.isLoading && !_vm.post
+        ? _c("Loader")
+        : _c("PostCard", { attrs: { post: _vm.post } }),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
