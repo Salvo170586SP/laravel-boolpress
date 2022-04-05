@@ -1,8 +1,8 @@
 <template>
   <div>
     <Header :title="title" />
-    <main class="container">
-      <PostsList />
+    <main>
+     <router-view></router-view>
     </main>
   </div>
 </template>
@@ -18,7 +18,7 @@ export default {
   },
   data(){
     return{
-      title: "Welcome",
+      title: "Boolpress",
     };
   }
 };

@@ -15,6 +15,10 @@ class Post extends Model
         return $this->belongsTo('App\Models\Category');
     }
 
+   /*  public function author(){
+        return $this->belongsTo('App\User' , 'user_id ', 'id');
+    } */
+
     public function tags(){
         return $this->belongsToMany('App\Models\Tag');
     }

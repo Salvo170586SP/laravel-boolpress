@@ -21,6 +21,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Titolo</th>
                         <th scope="col">Categoria</th>
+                       {{--  <th scope="col">Autore</th> --}}
                         <th scope="col">Tag</th>
                         <th scope="col">Creato il..</th>
                         <th scope="col"></th>
@@ -38,6 +39,13 @@
                                     -
                                 @endif
                             </td>
+                            {{-- <td>
+                                @if($post->user)
+                                {{ $post->user }}
+                                @else
+                                -
+                                @endif
+                            </td> --}}
 
                             <td>
                                 @forelse($post->tags as $tag)

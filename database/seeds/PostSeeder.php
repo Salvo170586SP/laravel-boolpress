@@ -21,7 +21,7 @@ class PostSeeder extends Seeder
 
         for($i = 0; $i < 10; $i++){
             $post = new Post();
-
+            /* $post->user_id = 1; */
             $post->category_id = Arr::random($category_ids);
             $post->title = $faker->text(30);
             $post->content = $faker->paragraph(2, false);
