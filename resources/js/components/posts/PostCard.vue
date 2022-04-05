@@ -4,7 +4,7 @@
       <div>{{ getDatePost }}</div>
 
       <div>
-        <router-link class="btn btn-sm btn-primary" :to="{name: 'post-detail', params:{ id: post.id }}" >Scopri dettagli</router-link>
+        <router-link v-if="!hydeLink" class="btn btn-sm btn-primary" :to="{name: 'post-detail', params:{ id: post.id }}" >Scopri dettagli</router-link>
       </div>
     </div>
     <div class="card-body bg-dark">
@@ -33,7 +33,7 @@
 <script>
 export default {
   name: "PostCard",
-  props: ["post"],
+  props: ["post", "hyde-link"],
   computed: {
     //COSTRUISCO LA DATA
     getDatePost() {

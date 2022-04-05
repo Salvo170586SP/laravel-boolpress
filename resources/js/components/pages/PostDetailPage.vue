@@ -2,7 +2,7 @@
   <section id="post-detail">
     <h2>Dettagli post</h2>
     <Loader v-if="isLoading && !post" />
-    <PostCard v-else :post="post" />
+    <PostCard v-else :post="post" :hyde-link="true" />
   </section>
 </template>
 
