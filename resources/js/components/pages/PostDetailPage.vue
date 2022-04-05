@@ -41,7 +41,7 @@ export default {
   },
   mounted() {
     //CHIAMO L'API
-    this.getPosts();
+    this.getPost();
   },
 };
 </script>
