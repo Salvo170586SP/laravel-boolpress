@@ -31,11 +31,8 @@ Route::middleware('auth')
 });
 
 
-/* Route::get('{any?}', function () {
-    return view('guest.home');
-})->where("any" , ".*"); */
 
-
-Route::get('/', function () {
+//ROTTA DELLA PAGINE GUEST DI VUEJS
+Route::get('{any?}', function () {
     return view('guest.home');
-});
+})->where("any" , ".*");

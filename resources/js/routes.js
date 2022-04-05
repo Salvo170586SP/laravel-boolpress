@@ -5,11 +5,13 @@ Vue.use(VueRouter)
 
 
 import HomePage from './components/pages/HomePage.vue';
+import PostDetailPage from './components/pages/PostDetailPage.vue';
 
 const router = new VueRouter({
     mode: 'history',
     routes: [
-        { path: '/', component: HomePage }
+        { path: '/', component: HomePage, name: 'home' },
+        { path: '/posts/:id', component: PostDetailPage, name: 'post-detail' },
     ]
 
 })

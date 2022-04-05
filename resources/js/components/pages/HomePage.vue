@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <section id="home-page">
       <PostsList />
-  </div>
+  </section>
 </template>
 
 <script>

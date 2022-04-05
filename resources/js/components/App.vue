@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header :title="title" />
-    <main>
+    <main class="container my-4">
      <router-view></router-view>
     </main>
   </div>
