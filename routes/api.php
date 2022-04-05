@@ -20,4 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //API DEI POST
 Route::get('/posts', 'Api\PostController@index');
-Route::get('/posts/{id}', 'Api\PostController@show');
+Route::get('/posts/{slug}', 'Api\PostController@show');
