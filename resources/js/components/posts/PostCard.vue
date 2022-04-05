@@ -1,19 +1,27 @@
 <template>
   <div class="card bg-dark my-4">
-    <div class=" p-3 d-flex justify-content-between align-items-center">
+    <div class="p-3 d-flex justify-content-between align-items-center">
       <div>{{ getDatePost }}</div>
 
       <div>
-        <router-link v-if="!hydeLink" class="btn btn-sm btn-primary" :to="{name: 'post-detail', params:{ slug: post.slug }}" >Scopri dettagli</router-link>
+        <router-link
+          v-if="!hydeLink"
+          class="btn btn-sm btn-primary"
+          :to="{ name: 'post-detail', params: { slug: post.slug } }"
+          >Scopri dettagli</router-link
+        >
       </div>
     </div>
     <div class="card-body bg-dark">
       <blockquote class="blockquote mb-0">
         <h3>{{ post.title }}</h3>
         <p>{{ post.content }}</p>
-        <footer class="card-footer d-flex justify-content-between align-items-center">
-
-          <span :class="`badge badge-pill badge-${post.category.color}`">{{post.category.label}}</span>
+        <footer
+          class="card-footer d-flex justify-content-between align-items-center"
+        >
+          <span :class="`badge badge-pill badge-${post.category.color}`">{{
+            post.category.label
+          }}</span>
 
           <div>
             <span
