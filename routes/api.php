@@ -23,4 +23,4 @@ Route::get('/posts', 'Api\PostController@index');
 Route::get('/posts/{slug}', 'Api\PostController@show');
 
 //API PER L'INVIO DELLA MAIL 
-Route::post('message', 'Api\MessageMailController@send');
+Route::post('messages', 'Api\MessageMailController@send');
