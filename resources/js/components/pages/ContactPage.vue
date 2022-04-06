@@ -1,8 +1,9 @@
 <template>
   <section id="contact">
     <h2 class="mb-5">Contattaci</h2>
+    <Alert v-if="alertMessage" type="success" >{{ alertMessage }}</Alert>
+  
     <Loader v-if="isLoading" />
-
     <div v-else>
       <div class="form-group">
         <label for="email">Email</label>
@@ -35,10 +36,12 @@
 
 <script>
 import Loader from "../Loader.vue";
+import Alert from "../Alert.vue";
 export default {
   name: "ContactPage",
   components: {
     Loader,
+    Alert
   },
   data() {
     return {
@@ -48,6 +51,7 @@ export default {
       },
 
       isLoading: false,
+      alertMessage: "",
     };
   },
   methods: {
@@ -60,6 +64,7 @@ export default {
           //svuoto i campi dopo aver inviato i dati
           this.form.email = "";
           this.form.message = "";
+          this.alertMessage = "Messaggio inviato con successo";
         })
         .catch((err) => {
           this.errors = { error: 'Si è verificato un errore'};
