@@ -21,3 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //API DEI POST
 Route::get('/posts', 'Api\PostController@index');
 Route::get('/posts/{slug}', 'Api\PostController@show');
+
+//API PER L'INVIO DELLA MAIL 
+Route::post('message', 'Api\MessageMailController@send');
