@@ -2108,6 +2108,17 @@ __webpack_require__.r(__webpack_exports__);
     sendForm: function sendForm() {
       var _this = this;
 
+      //#VALIDAZIONE DEL FORM
+      var errors = {};
+      if (!this.form.email.trim()) errors.email = "L'indirizzo email è obbligatorio";
+      if (!this.form.message.trim()) errors.message = "Il messaggio è obbligatorio";
+
+      if (!this.form.email.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)) {
+        errors.email = "La mail inserita non è valida";
+      }
+
+      this.errors = errors; //#FINE VALIDAZIONE
+
       this.isLoading = true;
       axios.post("http://localhost:8000/api/messages", this.form).then(function (res) {
         //con il metodo post invio

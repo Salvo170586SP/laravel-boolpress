@@ -1,7 +1,7 @@
 <template>
   <section id="contact">
     <h2 class="mb-5">Contattaci</h2>
-    
+
     <Loader v-if="isLoading" />
 
     <div v-else>
@@ -69,9 +69,21 @@ export default {
       errors: {},
     };
   },
-  
+
   methods: {
     sendForm() {
+      //#VALIDAZIONE DEL FORM
+      const errors = {};
+      if (!this.form.email.trim()) errors.email = "L'indirizzo email è obbligatorio";
+      if (!this.form.message.trim()) errors.message = "Il messaggio è obbligatorio";
+      
+      if (!this.form.email.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)) {
+        errors.email = "La mail inserita non è valida";
+      }
+
+      this.errors = errors;
+      //#FINE VALIDAZIONE
+
       this.isLoading = true;
       axios
         .post("http://localhost:8000/api/messages", this.form)
@@ -91,12 +103,11 @@ export default {
         });
     },
   },
-   computed: {
+  computed: {
     hasErrors() {
       //se l'oggetto errors non è vuoto allora ci sono errori
       return !isEmpty(this.errors);
     },
   },
- 
 };
 </script>
