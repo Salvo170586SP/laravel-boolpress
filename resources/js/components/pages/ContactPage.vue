@@ -29,7 +29,8 @@
           v-model="form.email"
           :class="{ 'is-invalid': errors.email }"
         />
-        <small id="email" class="form-text text-light"
+        <small v-if="errors.email" class="invalid-feedback" >{{ errors.email }}</small>
+        <small v-else  id="email" class="form-text text-light"
           >Invieremo una risposta al tuo indirizzo</small
         >
       </div>
@@ -43,6 +44,7 @@
           v-model="form.message"
           :class="{ 'is-invalid': errors.message }"
         ></textarea>
+        <small v-if="errors.message" class="invalid-feedback">{{ errors.message }}</small>
       </div>
       <button class="btn btn-secondary" @click="sendForm">Invia</button>
     </div>

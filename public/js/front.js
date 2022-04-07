@@ -2086,6 +2086,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -38939,14 +38941,18 @@ var render = function () {
                   },
                 }),
                 _vm._v(" "),
-                _c(
-                  "small",
-                  {
-                    staticClass: "form-text text-light",
-                    attrs: { id: "email" },
-                  },
-                  [_vm._v("Invieremo una risposta al tuo indirizzo")]
-                ),
+                _vm.errors.email
+                  ? _c("small", { staticClass: "invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.email)),
+                    ])
+                  : _c(
+                      "small",
+                      {
+                        staticClass: "form-text text-light",
+                        attrs: { id: "email" },
+                      },
+                      [_vm._v("Invieremo una risposta al tuo indirizzo")]
+                    ),
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
@@ -38974,6 +38980,12 @@ var render = function () {
                     },
                   },
                 }),
+                _vm._v(" "),
+                _vm.errors.message
+                  ? _c("small", { staticClass: "invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errors.message)),
+                    ])
+                  : _vm._e(),
               ]),
               _vm._v(" "),
               _c(
