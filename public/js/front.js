@@ -2033,6 +2033,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Loader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Loader.vue */ "./resources/js/components/Loader.vue");
 /* harmony import */ var _Alert_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Alert.vue */ "./resources/js/components/Alert.vue");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -2069,6 +2071,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2084,7 +2100,8 @@ __webpack_require__.r(__webpack_exports__);
         message: ""
       },
       isLoading: false,
-      alertMessage: ""
+      alertMessage: "",
+      errors: {}
     };
   },
   methods: {
@@ -2099,12 +2116,19 @@ __webpack_require__.r(__webpack_exports__);
         _this.form.message = "";
         _this.alertMessage = "Messaggio inviato con successo";
       })["catch"](function (err) {
+        console.error(err.response.status);
         _this.errors = {
-          error: 'Si è verificato un errore'
+          error: "Si è verificato un errore"
         };
       }).then(function () {
         _this.isLoading = false;
       });
+    }
+  },
+  computed: {
+    hasErrors: function hasErrors() {
+      //se l'oggetto errors non è vuoto allora ci sono errori
+      return !Object(lodash__WEBPACK_IMPORTED_MODULE_2__["isEmpty"])(this.errors);
     }
   }
 });
@@ -38842,84 +38866,112 @@ var render = function () {
     [
       _c("h2", { staticClass: "mb-5" }, [_vm._v("Contattaci")]),
       _vm._v(" "),
-      _vm.alertMessage
-        ? _c("Alert", { attrs: { type: "success" } }, [
-            _vm._v(_vm._s(_vm.alertMessage)),
-          ])
-        : _vm._e(),
-      _vm._v(" "),
       _vm.isLoading
         ? _c("Loader")
-        : _c("div", [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
+        : _c(
+            "div",
+            [
+              _vm.hasErrors || _vm.alertMessage
+                ? _c(
+                    "Alert",
+                    { attrs: { type: _vm.hasErrors ? "danger" : "success" } },
+                    [
+                      _vm.alertMessage
+                        ? _c("div", [_vm._v(_vm._s(_vm.alertMessage))])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.hasErrors
+                        ? _c(
+                            "ul",
+                            _vm._l(_vm.errors, function (error, key) {
+                              return _c("li", { key: key }, [
+                                _vm._v(_vm._s(error)),
+                              ])
+                            }),
+                            0
+                          )
+                        : _vm._e(),
+                    ]
+                  )
+                : _vm._e(),
               _vm._v(" "),
-              _c("input", {
-                directives: [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.email,
+                      expression: "form.email",
+                    },
+                  ],
+                  staticClass: "form-control bg-dark text-light",
+                  attrs: {
+                    type: "email",
+                    id: "email",
+                    "aria-describedby": "emailHelp",
+                    name: "email",
+                  },
+                  domProps: { value: _vm.form.email },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "email", $event.target.value)
+                    },
+                  },
+                }),
+                _vm._v(" "),
+                _c(
+                  "small",
                   {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.email,
-                    expression: "form.email",
+                    staticClass: "form-text text-light",
+                    attrs: { id: "email" },
                   },
-                ],
-                staticClass: "form-control bg-dark text-light",
-                attrs: {
-                  type: "email",
-                  id: "email",
-                  "aria-describedby": "emailHelp",
-                  name: "email",
-                },
-                domProps: { value: _vm.form.email },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.form, "email", $event.target.value)
+                  [_vm._v("Invieremo una risposta al tuo indirizzo")]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "message" } }, [_vm._v("Testo")]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.message,
+                      expression: "form.message",
+                    },
+                  ],
+                  staticClass: "form-control bg-dark text-light",
+                  attrs: { id: "message", name: "message", rows: "10" },
+                  domProps: { value: _vm.form.message },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "message", $event.target.value)
+                    },
                   },
-                },
-              }),
+                }),
+              ]),
               _vm._v(" "),
               _c(
-                "small",
-                { staticClass: "form-text text-light", attrs: { id: "email" } },
-                [_vm._v("Invieremo una risposta al tuo indirizzo")]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "message" } }, [_vm._v("Testo")]),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.message,
-                    expression: "form.message",
-                  },
-                ],
-                staticClass: "form-control bg-dark text-light",
-                attrs: { id: "message", name: "message", rows: "10" },
-                domProps: { value: _vm.form.message },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.form, "message", $event.target.value)
-                  },
+                "button",
+                {
+                  staticClass: "btn btn-secondary",
+                  on: { click: _vm.sendForm },
                 },
-              }),
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "btn btn-secondary", on: { click: _vm.sendForm } },
-              [_vm._v("Invia")]
-            ),
-          ]),
+                [_vm._v("Invia")]
+              ),
+            ],
+            1
+          ),
     ],
     1
   )

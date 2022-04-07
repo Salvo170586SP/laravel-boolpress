@@ -1,10 +1,23 @@
 <template>
   <section id="contact">
     <h2 class="mb-5">Contattaci</h2>
-    <Alert v-if="alertMessage" type="success" >{{ alertMessage }}</Alert>
-  
+    
     <Loader v-if="isLoading" />
+
     <div v-else>
+      <Alert
+        v-if="hasErrors || alertMessage"
+        :type="hasErrors ? 'danger' : 'success'"
+      >
+        <!-- alert se il messaggio è stato inviato con successo -->
+        <div v-if="alertMessage">{{ alertMessage }}</div>
+
+        <!-- alert degli errori -->
+        <ul v-if="hasErrors">
+          <li v-for="(error, key) in errors" :key="key">{{ error }}</li>
+        </ul>
+      </Alert>
+
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -37,11 +50,12 @@
 <script>
 import Loader from "../Loader.vue";
 import Alert from "../Alert.vue";
+import { isEmpty } from "lodash";
 export default {
   name: "ContactPage",
   components: {
     Loader,
-    Alert
+    Alert,
   },
   data() {
     return {
@@ -52,8 +66,10 @@ export default {
 
       isLoading: false,
       alertMessage: "",
+      errors: {},
     };
   },
+  
   methods: {
     sendForm() {
       this.isLoading = true;
@@ -67,12 +83,20 @@ export default {
           this.alertMessage = "Messaggio inviato con successo";
         })
         .catch((err) => {
-          this.errors = { error: 'Si è verificato un errore'};
+          console.error(err.response.status);
+          this.errors = { error: "Si è verificato un errore" };
         })
         .then(() => {
           this.isLoading = false;
         });
     },
   },
+   computed: {
+    hasErrors() {
+      //se l'oggetto errors non è vuoto allora ci sono errori
+      return !isEmpty(this.errors);
+    },
+  },
+ 
 };
 </script>
