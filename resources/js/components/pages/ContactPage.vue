@@ -27,6 +27,7 @@
           aria-describedby="emailHelp"
           name="email"
           v-model="form.email"
+          :class="{ 'is-invalid': errors.email }"
         />
         <small id="email" class="form-text text-light"
           >Invieremo una risposta al tuo indirizzo</small
@@ -40,6 +41,7 @@
           name="message"
           rows="10"
           v-model="form.message"
+          :class="{ 'is-invalid': errors.message }"
         ></textarea>
       </div>
       <button class="btn btn-secondary" @click="sendForm">Invia</button>
@@ -74,9 +76,11 @@ export default {
     sendForm() {
       //#VALIDAZIONE DEL FORM
       const errors = {};
-      if (!this.form.email.trim()) errors.email = "L'indirizzo email è obbligatorio";
-      if (!this.form.message.trim()) errors.message = "Il messaggio è obbligatorio";
-      
+      if (!this.form.email.trim())
+        errors.email = "L'indirizzo email è obbligatorio";
+      if (!this.form.message.trim())
+        errors.message = "Il messaggio è obbligatorio";
+
       if (!this.form.email.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)) {
         errors.email = "La mail inserita non è valida";
       }

@@ -2084,6 +2084,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -38919,6 +38921,7 @@ var render = function () {
                     },
                   ],
                   staticClass: "form-control bg-dark text-light",
+                  class: { "is-invalid": _vm.errors.email },
                   attrs: {
                     type: "email",
                     id: "email",
@@ -38959,6 +38962,7 @@ var render = function () {
                     },
                   ],
                   staticClass: "form-control bg-dark text-light",
+                  class: { "is-invalid": _vm.errors.message },
                   attrs: { id: "message", name: "message", rows: "10" },
                   domProps: { value: _vm.form.message },
                   on: {
