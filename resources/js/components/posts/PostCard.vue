@@ -2,7 +2,6 @@
   <div class="card bg-dark my-4">
     <div class="p-3 d-flex justify-content-between align-items-center">
       <div>{{ getDatePost }}</div>
-
       <div>
         <router-link
           v-if="!hydeLink"
@@ -10,6 +9,7 @@
           :to="{ name: 'post-detail', params: { slug: post.slug } }"
           >Scopri dettagli</router-link
         >
+      <router-link v-else class="btn btn-sm btn-primary" :to="{name: 'home'}">Ritorna alla home</router-link>
       </div>
     </div>
     <div class="card-body bg-dark">

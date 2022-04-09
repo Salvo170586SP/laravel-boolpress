@@ -39148,7 +39148,14 @@ var render = function () {
                   },
                   [_vm._v("Scopri dettagli")]
                 )
-              : _vm._e(),
+              : _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-sm btn-primary",
+                    attrs: { to: { name: "home" } },
+                  },
+                  [_vm._v("Ritorna alla home")]
+                ),
           ],
           1
         ),
