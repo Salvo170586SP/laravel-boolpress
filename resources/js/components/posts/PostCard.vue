@@ -19,9 +19,8 @@
         <footer
           class="card-footer d-flex justify-content-between align-items-center"
         >
-          <span :class="`badge badge-pill badge-${post.category.color}`">{{
-            post.category.label
-          }}</span>
+          <span v-if="post.category"  :class="`badge badge-pill badge-${post.category.color}`">{{
+            post.category.label }}</span>
 
           <div>
             <span

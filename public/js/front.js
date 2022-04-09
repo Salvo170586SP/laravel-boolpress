@@ -2303,7 +2303,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
   props: ["post", "hyde-link"],
@@ -39175,11 +39174,15 @@ var render = function () {
               "card-footer d-flex justify-content-between align-items-center",
           },
           [
-            _c(
-              "span",
-              { class: "badge badge-pill badge-" + _vm.post.category.color },
-              [_vm._v(_vm._s(_vm.post.category.label))]
-            ),
+            _vm.post.category
+              ? _c(
+                  "span",
+                  {
+                    class: "badge badge-pill badge-" + _vm.post.category.color,
+                  },
+                  [_vm._v(_vm._s(_vm.post.category.label))]
+                )
+              : _vm._e(),
             _vm._v(" "),
             _c(
               "div",
