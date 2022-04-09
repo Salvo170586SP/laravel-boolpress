@@ -3,12 +3,14 @@
     <div class="d-flex align-items-center justify-content-between">
       <h2>Lista Dei Post</h2>
       <SelectorOptions
+        id="category-filter"
         label-text="seleziona categoria"
         default-option="Tutte le categorie"
         default-value=""
         option-text="label"
         option-value="id"
         :options="categories"
+        @filter-change="filterCategory"
       />
     </div>
 
@@ -40,14 +42,20 @@ export default {
       urlCategories: "http://localhost:8000/api/categories",
       isLoading: false,
       categories: [],
+      selectedCategory: null,
     };
   },
   methods: {
-    //CHIAMATA DELLE API DELLE CATEGORIE  
+    filterCategory(selectedValue) {
+      this.selectedCategory = selectedValue;
+      this.getPosts();
+    },
+
+    //CHIAMATA DELLE API DELLE CATEGORIE
     getCategories() {
       this.isLoading = true;
       axios
-        .get(this.urlCategories )
+        .get(this.urlCategories)
         .then((res) => {
           this.categories = res.data;
         })
@@ -60,11 +68,19 @@ export default {
         });
     },
 
-    //CHIAMATA DELLE API DEI POST  
+    //CHIAMATA DELLE API DEI POST
     getPosts() {
       this.isLoading = true;
+
+      //costruisco la string del category_id da montare alla url 
+      const queryString = {
+        params: {
+            category_id: this.selectedCategory,
+        }
+      }
+  
       axios
-        .get(this.urlPosts)
+        .get(this.urlPosts, queryString)
         .then((res) => {
           this.posts = res.data;
         })

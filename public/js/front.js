@@ -2043,10 +2043,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SelectiorOptions",
-  props: ['labelText', 'nameOption', 'defaultOption', 'defaultValue', 'optionText', 'optionValue', 'options'],
+  props: ['labelText', 'defaultOption', 'defaultValue', 'optionText', 'optionValue', 'options', 'id'],
   data: function data() {
     return {
-      selectedValue: ""
+      selectedValue: this.defaultValue || ""
     };
   }
 });
@@ -2390,6 +2390,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -2406,11 +2408,16 @@ __webpack_require__.r(__webpack_exports__);
       urlPosts: "http://localhost:8000/api/posts",
       urlCategories: "http://localhost:8000/api/categories",
       isLoading: false,
-      categories: []
+      categories: [],
+      selectedCategory: null
     };
   },
   methods: {
-    //CHIAMATA DELLE API DELLE CATEGORIE  
+    filterCategory: function filterCategory(selectedValue) {
+      this.selectedCategory = selectedValue;
+      this.getPosts();
+    },
+    //CHIAMATA DELLE API DELLE CATEGORIE
     getCategories: function getCategories() {
       var _this = this;
 
@@ -2424,12 +2431,18 @@ __webpack_require__.r(__webpack_exports__);
         console.log("chiamata terminata");
       });
     },
-    //CHIAMATA DELLE API DEI POST  
+    //CHIAMATA DELLE API DEI POST
     getPosts: function getPosts() {
       var _this2 = this;
 
-      this.isLoading = true;
-      axios.get(this.urlPosts).then(function (res) {
+      this.isLoading = true; //costruisco la string del category_id da montare alla url 
+
+      var queryString = {
+        params: {
+          category_id: this.selectedCategory
+        }
+      };
+      axios.get(this.urlPosts, queryString).then(function (res) {
         _this2.posts = res.data;
       })["catch"](function (err) {
         console.error(err);
@@ -38956,30 +38969,35 @@ var render = function () {
             staticClass: "form-control",
             attrs: { id: _vm.id },
             on: {
-              change: function ($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function (o) {
-                    return o.selected
-                  })
-                  .map(function (o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.selectedValue = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              },
+              change: [
+                function ($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function (o) {
+                      return o.selected
+                    })
+                    .map(function (o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.selectedValue = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                function ($event) {
+                  return _vm.$emit("filter-change", _vm.selectedValue)
+                },
+              ],
             },
           },
           [
-            _c("option", { attrs: { value: "" } }, [
+            _c("option", { domProps: { value: _vm.defaultValue } }, [
               _vm._v(_vm._s(_vm.defaultOption)),
             ]),
             _vm._v(" "),
             _vm._l(_vm.options, function (option, i) {
               return _c(
                 "option",
-                { key: i, domProps: { value: _vm.options[_vm.optionValue] } },
+                { key: i, domProps: { value: option[_vm.optionValue] } },
                 [_vm._v(_vm._s(option[_vm.optionText]))]
               )
             }),
@@ -39376,6 +39394,7 @@ var render = function () {
           _vm._v(" "),
           _c("SelectorOptions", {
             attrs: {
+              id: "category-filter",
               "label-text": "seleziona categoria",
               "default-option": "Tutte le categorie",
               "default-value": "",
@@ -39383,6 +39402,7 @@ var render = function () {
               "option-value": "id",
               options: _vm.categories,
             },
+            on: { "filter-change": _vm.filterCategory },
           }),
         ],
         1
