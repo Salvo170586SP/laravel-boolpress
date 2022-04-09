@@ -1,6 +1,17 @@
 <template>
   <section class="my-5">
-    <h2 class="mb-5">Lista Dei Post</h2>
+    <div class="d-flex align-items-center justify-content-between">
+      <h2>Lista Dei Post</h2>
+      <SelectorOptions
+        label-text="seleziona categoria"
+        default-option="Tutte le categorie"
+        default-value=""
+        option-text="label"
+        option-value="id"
+        :options="categories"
+      />
+    </div>
+
     <Loader v-if="isLoading" />
     <div v-else>
       <div v-if="posts.length">
@@ -14,25 +25,46 @@
 <script>
 import PostCard from "./PostCard.vue";
 import Loader from "../Loader.vue";
+import SelectorOptions from "../SelectorOptions.vue";
 export default {
   name: "PostsList",
   components: {
     PostCard,
     Loader,
+    SelectorOptions,
   },
   data() {
     return {
       posts: [],
-      url: "http://localhost:8000/api/posts",
+      urlPosts: "http://localhost:8000/api/posts",
+      urlCategories: "http://localhost:8000/api/categories",
       isLoading: false,
+      categories: [],
     };
   },
   methods: {
-    //CHIAMATA DELL API CON AXIOS
+    //CHIAMATA DELLE API DELLE CATEGORIE  
+    getCategories() {
+      this.isLoading = true;
+      axios
+        .get(this.urlCategories )
+        .then((res) => {
+          this.categories = res.data;
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+        .then(() => {
+          this.isLoading = false;
+          console.log("chiamata terminata");
+        });
+    },
+
+    //CHIAMATA DELLE API DEI POST  
     getPosts() {
       this.isLoading = true;
       axios
-        .get(this.url)
+        .get(this.urlPosts)
         .then((res) => {
           this.posts = res.data;
         })
@@ -46,8 +78,9 @@ export default {
     },
   },
   mounted() {
-    //CHIAMO L'API
+    //RICHIAMO L'API IN PAGINA
     this.getPosts();
+    this.getCategories();
   },
 };
 </script>

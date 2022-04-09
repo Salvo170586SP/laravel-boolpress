@@ -13,10 +13,24 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-       $posts = Post::with('category', 'tags')->orderBy('updated_at','DESC')->get();
-      
+        //prendo il percorso url
+        $params = $request->query();
+
+        //se mi arriva un parametro con 'category_id' e non è nullo, lo prendo, altrimenti è una stringa vuota (non lo prendo)
+        $category_id = $params['category_id'] ?? '';
+
+        //return response()->json($params);
+
+        $query = Post::with('category', 'tags')->orderBy('updated_at', 'DESC');
+
+        //se il category_id c'è lo prendo 
+        if ($category_id) $query->where('category_id', $category_id);
+
+        //quindi prendo il tutto e lo assegno alla variabile posts per portala giù in pagina per stampare i risultati in pagina
+        $posts = $query->get();
+
         return response()->json($posts);
     }
 
@@ -39,9 +53,9 @@ class PostController extends Controller
      */
     public function show($slug)
     {
-        $post = Post::where('slug', $slug)->with(['category','tags'])->first();
+        $post = Post::where('slug', $slug)->with(['category', 'tags'])->first();
 
-        if(!$post) return response('Post Not Found', 404);
+        if (!$post) return response('Post Not Found', 404);
 
         return response()->json($post);
     }
