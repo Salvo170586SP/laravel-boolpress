@@ -8,7 +8,13 @@
         </div>
         <div class="border border-secondary clearfix">
             <div class="float-left">
-                <img src="{{asset("storage/$post->image")}}" width="250px" alt="{{ $post->slug }}">
+                @if($post->image)
+                <figure style="width: 200px; height: 150px">
+                    <img src="{{asset("storage/$post->image")}}"   style="width: 100%; height: 100%; object-fit: contain" alt="img">
+                </figure>
+                @else
+                <img src="https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg" width="250" alt="placeholder">
+                @endif
             </div>
             <div class="body-text float-left m-3">
                 <h2>{{ $post->title }}</h2>

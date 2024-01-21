@@ -16,6 +16,9 @@
 
                     {{ __('You are logged in!') }}
                 </div>
+                <div class="m-3">
+                    <a class="btn btn-secondary" href="{{ route('admin.posts.index') }}">Posts</a>
+                </div>
             </div>
         </div>
     </div>

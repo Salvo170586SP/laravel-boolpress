@@ -15,7 +15,7 @@
         @endif
 
         <main>
-            <table class="table  text-white">
+            <table class="table border text-white">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -56,8 +56,9 @@
                             </td>
 
                             <td>{{ $post->created_at }}</td>
-                            <td class="d-flex">
-                                <a class="btn btn-sm btn-primary mx-2"
+                            <td>
+                                <div class="d-flex">
+                                    <a class="btn btn-sm btn-primary mx-2"
                                     href="{{ route('admin.posts.show', $post->id) }}">Vedi</a>
                                     <a class="btn btn-sm btn-secondary mx-2"
                                     href="{{ route('admin.posts.edit', $post->id) }}">Modifica</a>
@@ -67,6 +68,7 @@
                                         @csrf
                                         <button class="btn btn-sm btn-danger " type="submit">Cancella</button>
                                     </form>
+                                </div>
                             </td>
                         </tr>
                     @empty
